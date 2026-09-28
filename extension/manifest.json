@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "CodeFencer - 代码块一键转换",
+  "version": "1.8.0",
+  "description": "写博客神器：复制代码后按 Ctrl+Shift+V 一键粘贴成代码块，语言自动识别；选中转换、去围栏、右键菜单皆可。",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "CodeFencer\nCtrl+Shift+V 复制后粘贴成代码块\nCtrl+Shift+F 选中代码转代码块\nCtrl+Shift+X 选中代码块去围栏\n也可右键菜单操作"
+  },
+  "permissions": ["contextMenus", "clipboardRead", "clipboardWrite"],
+  "commands": {
+    "fence-selection": {
+      "suggested_key": { "default": "Ctrl+Shift+F" },
+      "description": "选中代码 → 转成代码块"
+    },
+    "unfence-selection": {
+      "suggested_key": { "default": "Ctrl+Shift+X" },
+      "description": "选中代码块 → 去掉围栏"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "128": "icon128.png"
+  }
+}
